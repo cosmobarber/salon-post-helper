@@ -4,7 +4,7 @@ from salon_data import salon_post_ideas, post_endings, basic_hashtags, location_
 
 st.set_page_config(page_title="Escondido Salon Posts", page_icon="✨", layout="centered")
 
-st.title("🌟 Escondido Salon Post Helper")
+st.title("🌟 Salon Post Helper")
 st.markdown("### Quick, ready-to-post ideas for the salon 💇‍♀️")
 
 
@@ -55,13 +55,7 @@ if option == "🎲 Random Post":
         post = get_random_post()
         formatted = generate_formatted_post(post)
         st.success("✅ Here's your random post!")
-        st.text_area("Copy this post:", formatted, height=300)
-
-        # Copy button
-        if st.button("📋 Copy to Clipboard"):
-            st.toast("✅ Copied to clipboard!", icon="📋")
-            # Fallback for mobile
-            st.code(formatted, language=None)
+        st.text_area("Long-press to copy 👇", formatted, height=340)
 
 else:  # Category Post
     category = st.selectbox(
@@ -74,11 +68,7 @@ else:  # Category Post
         post = get_post_by_category(category)
         formatted = generate_formatted_post(post, category)
         st.success("✅ Here's your category post!")
-        st.text_area("Copy this post:", formatted, height=300)
-
-        if st.button("📋 Copy to Clipboard"):
-            st.toast("✅ Copied to clipboard!", icon="📋")
-            st.code(formatted, language=None)
+        st.text_area("Long-press to copy 👇", formatted, height=340)
 
 st.divider()
-st.caption("Built for the Escondido salon • Tap the Copy button or long-press the text box ❤️")
+st.caption("Built for the Escondido salon • Long-press the text box to copy on your phone ❤️")
