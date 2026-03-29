@@ -55,12 +55,12 @@ if option == "🎲 Random Post":
         post = get_random_post()
         formatted = generate_formatted_post(post)
         st.success("✅ Here's your random post!")
-        st.text_area("Copy & paste this post:", formatted, height=320)
+        st.text_area("Copy this post:", formatted, height=300)
 
-        # Simple copy button that works better
+        # Copy button
         if st.button("📋 Copy to Clipboard"):
             st.toast("✅ Copied to clipboard!", icon="📋")
-            # This is the most reliable way in Streamlit
+            # Fallback for mobile
             st.code(formatted, language=None)
 
 else:  # Category Post
@@ -74,11 +74,11 @@ else:  # Category Post
         post = get_post_by_category(category)
         formatted = generate_formatted_post(post, category)
         st.success("✅ Here's your category post!")
-        st.text_area("Copy & paste this post:", formatted, height=320)
+        st.text_area("Copy this post:", formatted, height=300)
 
         if st.button("📋 Copy to Clipboard"):
             st.toast("✅ Copied to clipboard!", icon="📋")
             st.code(formatted, language=None)
 
 st.divider()
-st.caption("Built for the Escondido salon • Feel free to edit before posting ❤️")
+st.caption("Built for the Escondido salon • Tap the Copy button or long-press the text box ❤️")
