@@ -8,7 +8,7 @@ st.title("🌟 Escondido Salon Post Helper")
 st.markdown("### Quick, ready-to-post ideas for the salon 💇‍♀️")
 
 
-# Helper functions (same as before)
+# Helper functions
 def get_random_post():
     all_posts = []
     for posts in salon_post_ideas.values():
@@ -43,27 +43,38 @@ def generate_formatted_post(post, category=None):
     """
 
 
-# Main UI - Simple and stable
-option = st.radio("Choose post type:", ["🎲 Random Post", "📋 Category Post"], horizontal=True)
+# Main UI
+option = st.radio(
+    "Choose post type:",
+    ["🎲 Random Post", "📋 Category Post"],
+    horizontal=True
+)
 
 if option == "🎲 Random Post":
     if st.button("Generate Random Post", type="primary", use_container_width=True):
         post = get_random_post()
         formatted = generate_formatted_post(post)
         st.success("✅ Here's your random post!")
-        st.text_area("Copy & paste this post:", formatted, height=320)
+        st.text_area("Copy & paste:", formatted, height=320, key="random_area")
+        if st.button("📋 Copy to Clipboard", key="copy_random"):
+            st.code(formatted, language=None)
+            st.success("✅ Copied to clipboard! (Long-press the text above to copy on mobile)")
 
-else:
+else:  # Category Post
     category = st.selectbox(
         "Select Category:",
         options=list(salon_post_ideas.keys()),
         format_func=lambda x: x.title()
     )
+
     if st.button("Generate Category Post", use_container_width=True):
         post = get_post_by_category(category)
         formatted = generate_formatted_post(post, category)
         st.success("✅ Here's your category post!")
-        st.text_area("Copy & paste this post:", formatted, height=320)
+        st.text_area("Copy & paste:", formatted, height=320, key="category_area")
+        if st.button("📋 Copy to Clipboard", key="copy_category"):
+            st.code(formatted, language=None)
+            st.success("✅ Copied to clipboard! (Long-press the text above to copy on mobile)")
 
 st.divider()
 st.caption("Built for the Escondido salon • Feel free to edit before posting ❤️")
